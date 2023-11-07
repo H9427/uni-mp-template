@@ -1,6 +1,4 @@
-<script setup lang="ts">
-//
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <view class="index">index</view>
@@ -10,6 +8,4 @@
   </div>
 </template>
 
-<style lang="scss">
-//
-</style>
+<style lang="scss"></style>
