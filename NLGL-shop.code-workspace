@@ -6,11 +6,11 @@
   ],
   "settings": {
     //主题
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Solarized Dark",
     "workbench.iconTheme": "material-icon-theme",
     "explorer.confirmDelete": false,
     "editor.fontSize": 12,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     // 忽略拼写错误
     "cSpell.words": [
       "easycom",
