@@ -18,6 +18,8 @@
     {
       "path": "pages/my/my",
       "style": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
         "navigationBarTitleText": "我的"
       }
     },
@@ -78,5 +80,37 @@
         "selectedIconPath": "static/tabs/user_selected.png"
       }
     ]
+  },
+  // ...省略
+  // 分包加载规则
+  "subPackages": [
+    {
+      // ⼦包的根⽬录
+      "root": "pagesMember",
+      // ⻚⾯路径和窗⼝表现
+      "pages": [
+        {
+          "path": "settings/settings",
+          "style": {
+            "navigationBarTitleText": "设置"
+          }
+        },
+        {
+          "path": "profile/profile",
+          "style": {
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white",
+            "navigationBarTitleText": "个⼈信息"
+          }
+        }
+      ]
+    }
+  ],
+  // 分包预下载规则
+  "preloadRule": {
+    "pages/my/my": {
+      "network": "all",
+      "packages": ["pagesMember"]
+    }
   }
 }

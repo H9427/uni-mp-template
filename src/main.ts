@@ -1,5 +1,6 @@
 import { createSSRApp } from 'vue'
 import pinia from './stores'
+
 import 'virtual:windi-base.css'
 import 'virtual:windi-components.css'
 import 'virtual:windi-utilities.css'
@@ -10,6 +11,7 @@ export function createApp() {
 
   app.use(pinia)
   return {
-    app
+    app,
+    pinia
   }
 }
