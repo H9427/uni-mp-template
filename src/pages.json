@@ -12,15 +12,17 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
       }
     },
     {
       "path": "pages/my/my",
       "style": {
+        "navigationBarTitleText": "我的",
         "navigationStyle": "custom",
-        "navigationBarTextStyle": "white",
-        "navigationBarTitleText": "我的"
+        "navigationBarTextStyle": "white"
       }
     },
     {
@@ -39,6 +41,42 @@
       "path": "pages/login/login",
       "style": {
         "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/hot/hot",
+      "style": {
+        "navigationBarTitleText": "hot"
+      }
+    },
+    {
+      "path": "pages/goods/goods",
+      "style": {
+        "navigationBarTitleText": "商品详情"
+      }
+    },
+    {
+      "path": "pages/goods/components/ServicePanel",
+      "style": {
+        "navigationBarTitleText": "ServicePanel"
+      }
+    },
+    {
+      "path": "pages/goods/components/AddressPanel",
+      "style": {
+        "navigationBarTitleText": "AddressPanel"
+      }
+    },
+    {
+      "path": "pages/cart/components/CartMain",
+      "style": {
+        "navigationBarTitleText": "CartMain"
+      }
+    },
+    {
+      "path": "pages/cart/cart2",
+      "style": {
+        "navigationBarTitleText": "购物车"
       }
     }
   ],
@@ -81,13 +119,11 @@
       }
     ]
   },
-  // ...省略
   // 分包加载规则
   "subPackages": [
+    // 子包根目录
     {
-      // ⼦包的根⽬录
       "root": "pagesMember",
-      // ⻚⾯路径和窗⼝表现
       "pages": [
         {
           "path": "settings/settings",
@@ -100,7 +136,49 @@
           "style": {
             "navigationStyle": "custom",
             "navigationBarTextStyle": "white",
-            "navigationBarTitleText": "个⼈信息"
+            "navigationBarTitleText": "个人信息"
+          }
+        },
+        {
+          "path": "address/address",
+          "style": {
+            "navigationBarTitleText": "地址"
+          }
+        },
+        {
+          "path": "address/address-form",
+          "style": {
+            "navigationBarTitleText": "新建地址"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesOrder",
+      "pages": [
+        {
+          "path": "create/create",
+          "style": {
+            "navigationBarTitleText": "填写订单"
+          }
+        },
+        {
+          "path": "detail/detail",
+          "style": {
+            "navigationBarTitleText": "订单详情",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "payment/payment",
+          "style": {
+            "navigationBarTitleText": "支付结果"
+          }
+        },
+        {
+          "path": "list/list",
+          "style": {
+            "navigationBarTitleText": "订单列表"
           }
         }
       ]
