@@ -98,12 +98,31 @@ const gotoPayment = () => {
   // 跳转到结算页
   uni.navigateTo({ url: '/pagesOrder/create/create' })
 }
+
+const { guessRef, onScrolltolower } = useGuessList()
+
+// 下拉刷新状态
+const isTriggered = ref(false)
+// 自定义下拉刷新被触发
+const onRefresherrefresh = async () => {
+  // 开启动画
+  isTriggered.value = true
+  // 重置猜你喜欢组件数据
+  guessRef.value?.resetData() // 加载数据
+  isTriggered.value = false
+}
 </script>
 
 <template>
-  <scroll-view scroll-y class="scroll-view">
+  <scroll-view
+    scroll-y
+    class="scroll-view"
+    @scrolltolower="onScrolltolower"
+    :refresher-triggered="isTriggered"
+    @refresherrefresh="onRefresherrefresh"
+  >
     <!-- 已登录: 显示购物车 -->
-    <template v-if="true">
+    <template v-if="memberStore.profile">
       <!-- 购物车列表 -->
       <view class="cart-list" v-if="showCartList">
         <!-- 优惠提示 -->
@@ -127,15 +146,15 @@ const gotoPayment = () => {
                   <view class="price">{{ item.price }}</view>
                 </view>
               </navigator>
-            </view>
-            <view class="count">
-              <vk-data-input-number-box
-                v-model="item.count"
-                :min="1"
-                :max="item.stock"
-                :index="item.id"
-                @change="onChangeCount"
-              />
+              <view class="count">
+                <vk-data-input-number-box
+                  v-model="item.count"
+                  :min="1"
+                  :max="item.stock"
+                  :index="item.id"
+                  @change="onChangeCount"
+                />
+              </view>
             </view>
             <!-- 右侧删除按钮 -->
             <template #right>
@@ -177,10 +196,10 @@ const gotoPayment = () => {
         <button class="button">去登录</button>
       </navigator>
     </view>
-    <!-- 猜你喜欢 -->
-    <Guess ref="guessRef"></Guess>
     <!-- 底部占位空盒子 -->
     <view class="toolbar-height"></view>
+    <!-- 猜你喜欢 -->
+    <Guess ref="guessRef"></Guess>
   </scroll-view>
 </template>
 

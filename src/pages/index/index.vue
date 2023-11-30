@@ -29,7 +29,6 @@
 import CustomNavbar from './components/CustomNavbar'
 import CategoryPanel from './components/CategoryPanel'
 import HotPannel from './components/HotPannel'
-import type { GuessInstance } from '@/types/component'
 import Guess from '@/components/Guess/Guess'
 import PageSkeleton from './components/PageSkeleton.vue'
 // 获取轮播图
@@ -61,12 +60,7 @@ onLoad(async () => {
   isLoading.value = false
 })
 
-// 获取猜你喜欢组件实例
-const guessRef = ref<GuessInstance>()
-// 滚动触底事件
-const onScrolltolower = () => {
-  guessRef.value?.getMore()
-}
+const { guessRef, onScrolltolower } = useGuessList()
 
 // 下拉刷新状态
 const isTriggered = ref(false)

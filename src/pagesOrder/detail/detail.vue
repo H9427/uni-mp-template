@@ -5,6 +5,10 @@ const pages = getCurrentPages()
 // 获取当前页面实例，数组最后一项
 const pageInstance = pages.at(-1) as any
 
+// 基于小程序的 Page 实例类型扩展 uni-app 的 Page
+// type PageInstance=Page.PageInstance&WechatMiniprogram.Page.InstanceMethods<any>
+//   const pageInstance=pages.at(-1)asPageInstance
+
 // 页面渲染完毕，绑定动画效果
 onReady(() => {
   // 动画效果,导航栏背景色
@@ -149,6 +153,28 @@ const onOrderConfirm = () => {
     }
   })
 }
+
+// 是否加载中标记
+const isLoading = ref(false)
+onLoad(async () => {
+  isLoading.value = true
+  // await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()])
+  isLoading.value = false
+})
+
+const { guessRef, onScrolltolower } = useGuessList()
+
+// 下拉刷新状态
+const isTriggered = ref(false)
+// 自定义下拉刷新被触发
+const onRefresherrefresh = async () => {
+  // 开启动画
+  isTriggered.value = true
+  // 重置猜你喜欢组件数据
+  guessRef.value?.resetData() // 加载数据
+  // await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()]) // 关闭动画
+  isTriggered.value = false
+}
 </script>
 
 <template>
@@ -160,7 +186,15 @@ const onOrderConfirm = () => {
       <view class="title">订单详情</view>
     </view>
   </view>
-  <scroll-view class="viewport" scroll-y enable-back-to-top id="scroller">
+  <scroll-view
+    class="viewport"
+    scroll-y
+    enable-back-to-top
+    id="scroller"
+    @scrolltolower="onScrolltolower"
+    :refresher-triggered="isTriggered"
+    @refresherrefresh="onRefresherrefresh"
+  >
     <template v-if="order">
       <!-- 订单状态 -->
       <view class="overview" :style="{ paddingTop: safeAreaInsets!.top + 20 + 'px' }">
@@ -273,7 +307,7 @@ const onOrderConfirm = () => {
       </view>
 
       <!-- 猜你喜欢 -->
-      <Guess ref="guessRef" />
+      <!-- <Guess ref="guessRef" /> -->
 
       <!-- 底部操作栏 -->
       <view class="toolbar-height" :style="{ paddingBottom: safeAreaInsets?.bottom + 'px' }"></view>
